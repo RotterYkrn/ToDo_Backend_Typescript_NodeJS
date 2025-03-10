@@ -3,10 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "start": "ts-node src/server.ts",
+    "dev": "nodemon --exec ts-node src/server.ts"
   },
   "dependencies": {
     "express": "^4.21.2",
+    "mysql2": "^3.13.0",
+    "sequelize": "^6.37.6",
     "typescript": "^5.8.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2"
   }
 }
