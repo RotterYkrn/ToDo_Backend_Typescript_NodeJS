@@ -53,3 +53,5 @@ typings/
 # server build files
 dist/
 build/
+
+.vscode/
