@@ -1,9 +1,12 @@
-import { createServer } from "http";
+import express, { Request, Response } from 'express';
 
-const server = createServer();
+const app = express();
+const port = 5000;
 
-const PORT = 5000;
+app.get('/', (req: Request, res: Response) => {
+  res.send('Hello, World!');
+});
 
-server.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
