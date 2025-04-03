@@ -8,14 +8,17 @@
     "dev": "nodemon --exec ts-node src/server.ts"
   },
   "dependencies": {
+    "body-parser": "^1.20.3",
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "mysql2": "^3.13.0",
-    "sequelize": "^6.37.6",
-    "typescript": "^5.8.2"
+    "mysql2": "^3.14.0",
+    "sequelize": "^6.37.6"
   },
   "devDependencies": {
-    "@types/express": "^5.0.0",
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.13.13",
     "nodemon": "^3.1.9",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
   }
 }
