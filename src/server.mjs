@@ -1,33 +1,66 @@
-// import express from "express";
+import express from "express";
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
+import cors from "cors";
 
-// const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-// const PORT = 3000;
+const app = express();
+const PORT = 3000;
 
-// app.get("/", (req, res) => {
-//     res.send("Hello World!");
-//     console.log(req);
-// });
+app.use(cors());
 
-// app.listen(PORT, () => {
-//     console.log(`Server is running on port ${PORT}`);
-// });
+/**
+ * @typedef {object} TodoItem
+ * @property {number} id - ToDo アイテムのID
+ * @property {string} title - ToDo のタイトル
+ * @property {boolean} completed - 完了状態
+ */
 
-import { PrismaClient } from "../generated/prisma/index.js";
+/**
+ * 固定の ToDo アイテムの配列
+ * @type {TodoItem[]}
+ */
+const todos = [
+    { id: 1, title: "牛乳を買う", completed: false },
+    { id: 2, title: "洗濯物を取り込む", completed: true },
+    { id: 3, title: "レポートを完成させる", completed: false },
+];
 
-const prisma = new PrismaClient();
+/**
+ * ToDo リストを取得する API エンドポイント
+ * @route GET /api/todos
+ * @returns {Array<TodoItem>} - ToDo アイテムの配列
+ */
+app.get("/api/todos", (_, res) => {
+    res.json(todos);
+});
 
-async function main() {
-    const allUsers = await prisma.user.findMany();
-    console.log(allUsers);
-}
+/**
+ * 静的ファイル (HTML, CSS, JavaScript) を提供するための設定
+ */
+app.use(express.static(join(__dirname, "."))); // クライアント側の index.html などがあるディレクトリを指定
 
-main()
-    .then(async () => {
-        await prisma.$disconnect();
-    })
-    .catch(async (e) => {
-        console.error(e);
-        await prisma.$disconnect();
-        process.exit(1);
-    });
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});
+
+// import { PrismaClient } from "../generated/prisma/index.js";
+
+// const prisma = new PrismaClient();
+
+// async function main() {
+//     const allUsers = await prisma.todoList.findMany();
+//     console.log(allUsers);
+// }
+
+// main()
+//     .then(async () => {
+//         await prisma.$disconnect();
+//     })
+//     .catch(async (e) => {
+//         console.error(e);
+//         await prisma.$disconnect();
+//         process.exit(1);
+//     });
